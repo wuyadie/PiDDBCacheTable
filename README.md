@@ -20,7 +20,6 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 	//Get First Entry
 	PiDDBCacheEntry* FirstEntry = PiDDBCacheTable->BalancedRoot.RightChild;
 
-
 	kOutput("[-] First Entry -> 0x%p\t:\tFirst Entry TimeStamp -> 0x%x\n",
 		FirstEntry,
 		//FirstEntry->DriverName,
@@ -33,7 +32,6 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 		CurrEntry = (PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, FALSE)	/* no restart, get latest element */
 		) 
 	{
-
 		ExAcquireResourceExclusiveLite(&lock, TRUE);
 
 		if (CurrEntry->TimeDateStamp == TimeStamp) {
