@@ -25,14 +25,14 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 		//FirstEntry->DriverName,
 		FirstEntry->TimeDateStamp
 	);
-
+	ExAcquireResourceExclusiveLite(lock, TRUE);
 	for (PiDDBCacheEntry* CurrEntry = 
 		(PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, TRUE);			/* restart */
 		CurrEntry != NULL;									/* as long as the current entry is valid */
 		CurrEntry = (PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, FALSE)	/* no restart, get latest element */
 		) 
 	{
-		ExAcquireResourceExclusiveLite(&lock, TRUE);
+		
 
 		if (CurrEntry->TimeDateStamp == TimeStamp) {
 			kOutput("[-] Entry Name -> %wZ\t:\tEntry TimeStamp -> 0x%x\n",
@@ -45,12 +45,12 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 			//Delete
 			RtlDeleteElementGenericTableAvl(&PiDDBCacheTable, CurrEntry);
 			//Clean up
-			ExReleaseResourceLite(PiDDBCacheTable);
+			ExReleaseResourceLite(lock);
 
 			return STATUS_SUCCESS;
 		}
 	}
-	ExReleaseResourceLite(PiDDBCacheTable);
+	ExReleaseResourceLite(lock);
 	return STATUS_NOT_FOUND;
 }
 
