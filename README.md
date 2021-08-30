@@ -45,14 +45,16 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 			//Unlink
 			RemoveEntryList(&CurrEntry->List);
 			//Delete
-			RtlDeleteElementGenericTableAvl(&PiDDBCacheTable, CurrEntry);
+			RtlDeleteElementGenericTableAvl(PiDDBCacheTable, CurrEntry);
 			//Clean up
 			ExReleaseResourceLite(lock);
 
 			return STATUS_SUCCESS;
 		}
 	}
+	
 	ExReleaseResourceLite(lock);
+	
 	return STATUS_NOT_FOUND;
 }
 
