@@ -6,7 +6,7 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 	//0x140D2D040
 	PERESOURCE lock;
 	PRTL_AVL_TABLE PiDDBCacheTable;
-	if (!NT_SUCCESS(LocatePiDDB(&lock, &PiDDBCacheTable))) {
+	if (!NT_SUCCESS(ScanPiDDB(&lock, &PiDDBCacheTable))) {
 		kOutput("Locating PiDDB Failed\n");
 		return STATUS_NOT_FOUND;
 	}
