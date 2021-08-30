@@ -28,8 +28,8 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 	);
 
 	for (PiDDBCacheEntry* CurrEntry = 
-		(PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, TRUE);				/* restart */
-		CurrEntry != NULL;																	/* as long as the current entry is valid */
+		(PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, TRUE);			/* restart */
+		CurrEntry != NULL;									/* as long as the current entry is valid */
 		CurrEntry = (PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, FALSE)	/* no restart, get latest element */
 		) 
 	{
