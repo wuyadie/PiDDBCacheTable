@@ -57,5 +57,5 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 }```
 
 
-To get your timestamp dynamically read the following.
-https://blog.kowalczyk.info/articles/pefileformat.html
+//To get your timestamp dynamically read the following.
+//https://blog.kowalczyk.info/articles/pefileformat.html
