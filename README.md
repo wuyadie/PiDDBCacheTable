@@ -25,7 +25,9 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 		//FirstEntry->DriverName,
 		FirstEntry->TimeDateStamp
 	);
+	
 	ExAcquireResourceExclusiveLite(lock, TRUE);
+	
 	for (PiDDBCacheEntry* CurrEntry = 
 		(PiDDBCacheEntry*)RtlEnumerateGenericTableAvl(PiDDBCacheTable, TRUE);			/* restart */
 		CurrEntry != NULL;									/* as long as the current entry is valid */
