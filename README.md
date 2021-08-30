@@ -55,3 +55,7 @@ NTSTATUS ClearPiddbCacheTable(ULONG TimeStamp) {
 	ExReleaseResourceLite(PiDDBCacheTable);
 	return STATUS_NOT_FOUND;
 }```
+
+
+To get your timestamp dynamically read the following.
+https://blog.kowalczyk.info/articles/pefileformat.html
